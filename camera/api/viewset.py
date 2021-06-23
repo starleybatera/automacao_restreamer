@@ -26,34 +26,31 @@ class Lista_Cameras(generics.ListAPIView):
     def get_queryset(self):
    
         time.sleep(2)
-        navegador = webdriver.Remote( 'http://127.0.0.1:4444/wd/hub',desired_capabilities=DesiredCapabilities.CHROME)
+        navegador = webdriver.Remote( 'http://selenium:4444/wd/hub',desired_capabilities=DesiredCapabilities.CHROME)
 
+        time.sleep(2)
+        navegador.get("http://rasp-01.sa.ngrok.io/")
+        username = navegador.find_element_by_id("input_username")
+        password = navegador.find_element_by_id("input_password")
+        username.send_keys("admin")
+        password.send_keys("datarhei")
 
-        
-        
-        # time.sleep(2)
-        # navegador.get("http://rasp-01.sa.ngrok.io/")
-        # username = navegador.find_element_by_id("input_username")
-        # password = navegador.find_element_by_id("input_password")
-        # username.send_keys("admin")
-        # password.send_keys("datarhei")
+        time.sleep(1)
 
-        # time.sleep(1)
+        button_login = navegador.find_element_by_xpath("//*[@type='submit']")
+        button_login.submit()
 
-        # button_login = navegador.find_element_by_xpath("//*[@type='submit']")
-        # button_login.submit()
+        time.sleep(3)
 
-        # time.sleep(3)
+        navegador.find_element_by_xpath('//*[@id="content"]/div[4]/label/input').click()
 
-        # navegador.find_element_by_xpath('//*[@id="content"]/div[4]/label/input').click()
+        time.sleep(2)
 
-        # time.sleep(2)
+        navegador.find_element_by_xpath('//*[@id="content"]/div[7]/div/div').click()
 
-        # navegador.find_element_by_xpath('//*[@id="content"]/div[7]/div/div').click()
+        time.sleep(90)
 
-        # time.sleep(90)
-
-        # navegador.find_element_by_xpath('//*[@id="content"]/div[7]/div[1]').click()
+        navegador.find_element_by_xpath('//*[@id="content"]/div[7]/div[1]').click()
         
 
         user = self.request.user
